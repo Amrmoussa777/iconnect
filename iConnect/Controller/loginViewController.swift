@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseAuth
+import Firebase
 class loginViewController: UIViewController {
     
     @IBOutlet weak var emailTextFeild: UITextField!
@@ -15,24 +15,16 @@ class loginViewController: UIViewController {
     @IBOutlet weak var bkgndImageView: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
-    
+    let DB = DBop()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupToHideKeyboardOnTapOnView()
-        //        emailTextFeild.layer.borderWidth = 2
-        //        emailTextFeild.layer.cornerRadius = 10
-        //        emailTextFeild.layer.borderColor = UIColor.init(named: "textfeildStrokeColor")?.cgColor
-        //        passTextField.layer.borderWidth = 2
-        //        passTextField.layer.cornerRadius = 10
-        //        passTextField.layer.borderColor = UIColor.init(named: "textfeildStrokeColor")?.cgColor
         emailTextFeild.addButtomLine()
         passTextField.addButtomLine()
         loginButton.layer.cornerRadius = 20
         registerButton.layer.cornerRadius = 20
-        //        emailTextFeild.setGradient(startColor: .clear, endColor: .darkGray)
-        //        emailTextFeild.clipsToBounds = true
-        //         passTextField.setGradient(startColor: .clear, endColor: .darkGray)
-        //         passTextField.clipsToBounds = true
+
+ 
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,16 +42,16 @@ class loginViewController: UIViewController {
     @IBAction func loginPressed(_ sender: UIButton) {
         bkgndImageView.subviews.forEach({ $0.removeFromSuperview() })
         if let email = emailTextFeild.text , let password = passTextField.text{
-            Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-                guard let strongSelf = self else { return }
-                // ...
-                if let err = error{
-                    print(err.localizedDescription)
+            
+            DB.CheckAuthenticate(email, password){(user : Firebase.User?) in
+                if user == nil {
+                    print("user not found")
+                }else{
+                    self.performSegue(withIdentifier: const.segues.loginToconversations , sender: self)
                 }
-                else{
-                    self?.performSegue(withIdentifier: const.segues.loginToconversations , sender: self)
-                }
+                
             }
+            
         }
     }
     //    animator

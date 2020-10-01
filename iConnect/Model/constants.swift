@@ -17,9 +17,16 @@ struct const {
         static let registerButtonColor  = "registerbuttoncolor"
     }
     struct DB {
-        
+        static let fsUserCollectionname = "users"
+        static let useremailfeild = "email"
+        static let usernameFeild = "username"
+        static let iamegelinkfeild = "imagelink"
+        static let conversationsArr = "conversations"
+        static let lastuctive = "lastActive"
     }
     struct  identifiers {
         static let conversationCellID = "conversationCell"
+        static let freindsCellID = "freindscell"
+        static let freindcellnibname = "freindCell"
     }
 }

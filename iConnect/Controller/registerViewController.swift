@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseStorage
+import Firebase
 class registerViewController: UIViewController {
     
-    
+    let DB = DBop()
     @IBOutlet weak var imageVeiwPicker: UIButton!
     @IBOutlet weak var bkimage: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
@@ -41,77 +40,16 @@ class registerViewController: UIViewController {
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
     }
-    //    func strokeRoundedUIview(_ views:[ UIView]){
-    //        for view in views {
-    //            view.layer.borderWidth = 2
-    //         view.layer.borderColor = UIColor.init(named: "textfeildStrokeColor")?.cgColor
-    //            view.layer.cornerRadius = 10
-    //        }
-    //    }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     @IBAction func registerBtnPressed(_ sender: UIButton) {
         if let email = enmailTextFeild.text,let password = passTextField.text,let username = nameTextField.text {
-            addNewUser(email,password,username,userIamge)
-            
-            
-        }
-        
-    }
-    
-    func addNewUser(_ email:String,_ password:String,_ username:String,_ image:UIImage?){
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            var downlink = ""
-            if let err = error{
-                print(err)
-            }
-            else{
-                if let data = authResult{
-                    print(data.user.email!)
-                    let uniqueString = UUID().uuidString
-                    let storageRef = Storage.storage().reference().child(uniqueString)
-                    
-                    if let uploadData = image!.jpegData(compressionQuality: CGFloat(0.5)){
-                        DispatchQueue.main.async {
-                                storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
-                                                   if let err = error{
-                                                       print(err)
-                                                       return
-                                                   }
-                                                   else{
-                                                       storageRef.downloadURL(completion: { (url, error) in
-                                                           downlink = (url?.absoluteString)!
-                                                           print(downlink)
-                                                           self.addUserdataToFireStrore(email,username,downlink)
-                                                              self.performSegue(withIdentifier: const.segues.registerToconversations, sender: self)
-                                                       })
-                                                       
-                        }
-                   
-                                
-                            }
-                        }
-                        
-                    }
-                    
-                    
-                    
-                    
-                    
-                 
+            DB.registerUser(email, password, username, userIamge) { (user:Firebase.User?) in
+                if user == nil{
+                    print("error while registering")
+                }else{
+                    self.performSegue(withIdentifier: const.segues.registerToconversations, sender: self)
                 }
-                
             }
-            
         }
-        
         
     }
     func addUserdataToFireStrore(_ email:String,_ username:String,_ imgDownLink:String){

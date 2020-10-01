@@ -12,7 +12,9 @@ class ConversationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationItem.hidesBackButton = true
+        navigationItem.title = "Chats"
+        navigationItem.largeTitleDisplayMode = .always
         // Do any additional setup after loading the view.
     }
     

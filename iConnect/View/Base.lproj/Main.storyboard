@@ -269,7 +269,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o1P-jT-0jT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1883" y="6"/>
+            <point key="canvasLocation" x="1586" y="68"/>
         </scene>
         <!--Feinds-->
         <scene sceneID="7Ar-pZ-0bF">
@@ -295,12 +295,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Feinds" id="R1m-48-jiV"/>
                     <connections>
+                        <outlet property="freindsTable" destination="phY-ZF-bdH" id="MSB-ol-Mjy"/>
                         <segue destination="hRC-Kd-WMM" kind="show" id="ctl-I6-6iK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5e-tw-DlT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1883" y="779"/>
+            <point key="canvasLocation" x="2103" y="741"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="oLJ-nm-pdK">
@@ -348,7 +349,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tmu-hP-enE"/>
+        <segue reference="ctl-I6-6iK"/>
         <segue reference="eym-o4-5tc"/>
     </inferredMetricsTieBreakers>
     <resources>
