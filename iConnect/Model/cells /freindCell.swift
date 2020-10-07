@@ -18,10 +18,10 @@ class freindCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -29,6 +29,6 @@ class freindCell: UITableViewCell {
 struct freindModel{
     let email:String
     let name :String
-    let imgUrl:String
+    let img:Data
     let lastActive:String
 }

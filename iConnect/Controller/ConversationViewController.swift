@@ -9,7 +9,12 @@
 import UIKit
 
 class ConversationViewController: UIViewController {
-
+    
+    
+    var useremail:String?
+    var receiveremail:String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true

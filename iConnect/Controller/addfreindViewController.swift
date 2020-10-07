@@ -11,6 +11,7 @@ import UIKit
 class addfreindViewController: UIViewController {
     let DB = DBop()
     var freinds = [freindModel]()
+    var selectedRow :Int?
     @IBOutlet weak var freindsTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,14 +20,17 @@ class addfreindViewController: UIViewController {
         freindsTable.register(UINib(nibName: const.identifiers.freindcellnibname, bundle: nil), forCellReuseIdentifier: const.identifiers.freindsCellID)
         DB.fetchFreinds("") { (freinds) in
             if  let newfreinds = freinds{
+                self.freinds = []
                 self.freinds = newfreinds
-                print(freinds?.count)
-                self.freindsTable.reloadData()
+                DispatchQueue.main.async {
+                    self.freindsTable.reloadData()
+                }
             }
             else{
             print("freinds not found")
             }
         }
+        
     }
     
  
@@ -51,21 +55,28 @@ extension addfreindViewController:UITableViewDataSource,UITableViewDelegate{
         let freind = freinds[indexPath.row]
         cell.freindNameLabel.text = freind.name
         cell.lastActiveLabel.text = freind.lastActive
-        DB.fetchimage(freind.imgUrl){(data:Data?) in
-            if let data = data{
-            DispatchQueue.main.async {
-              cell.imageView?.image = UIImage(data: data)
-                cell.imageView?.contentMode = .scaleAspectFit
-                cell.setNeedsLayout()
-            }
-            }
-        }
+        DispatchQueue.main.async {
+            cell.imageView?.image = UIImage(data: freind.img)
+                      cell.imageView?.contentMode = .scaleAspectFit
+                      cell.setNeedsLayout()
+                      
+                  }
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRow = indexPath.row
+        
+        performSegue(withIdentifier: const.segues.addtochat, sender: self)
+    }
      
-     
-     
-     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         let freind = freinds[selectedRow!]
+            if segue.identifier == const.segues.addtochat{
+                    let destination = segue.destination as? chatViewController
+                    destination?.reciver = freind
+
+            }
+        }
+
  }
 

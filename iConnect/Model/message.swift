@@ -7,6 +7,17 @@
 //
 
 import Foundation
-struct message {
-    
+struct message{
+    let body:String
+    let type:String
+    let timestamp:Double
+    var  stringtimestamp:String{
+       let date  = Date(timeIntervalSince1970: timestamp)
+        let df = DateFormatter()
+        df.dateFormat = "EEE, MMM d  hh:mm aaa"
+        let stringDate = df.string(from: date)
+        return stringDate
+    }
+    let owner:String
 }
+

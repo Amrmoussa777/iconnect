@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +25,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ysA-OF-Qa7">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="130"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="amr@mcld.int" placeholder=" Email" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3Qa-OS-tx4" userLabel="emailTextFeild">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="amrm@mcld.int" placeholder=" Email" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3Qa-OS-tx4" userLabel="emailTextFeild">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -296,7 +297,7 @@
                     <navigationItem key="navigationItem" title="Feinds" id="R1m-48-jiV"/>
                     <connections>
                         <outlet property="freindsTable" destination="phY-ZF-bdH" id="MSB-ol-Mjy"/>
-                        <segue destination="hRC-Kd-WMM" kind="show" id="ctl-I6-6iK"/>
+                        <segue destination="hRC-Kd-WMM" kind="show" identifier="addtochata" id="ctl-I6-6iK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5e-tw-DlT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -306,14 +307,72 @@
         <!--Chat View Controller-->
         <scene sceneID="oLJ-nm-pdK">
             <objects>
-                <viewController id="hRC-Kd-WMM" customClass="chatViewController" sceneMemberID="viewController">
+                <viewController id="hRC-Kd-WMM" customClass="chatViewController" customModule="iConnect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3x9-Zx-RuZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0V9-3U-5gB" userLabel="largeStack View">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t6Y-Eu-QHG">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="724"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </tableView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="iYb-XR-Rhb" userLabel="buttom Stack View">
+                                        <rect key="frame" x="0.0" y="724" width="414" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ACW-9K-VyD">
+                                                <rect key="frame" x="0.0" y="1" width="76" height="47.5"/>
+                                                <color key="tintColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" backgroundImage="photo" catalog="system"/>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="how r u ?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="des-cy-k2L">
+                                                <rect key="frame" x="76" y="0.0" width="273" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHd-Py-JLB">
+                                                <rect key="frame" x="349" y="0.5" width="65" height="49.5"/>
+                                                <color key="tintColor" name="registerbuttoncolor"/>
+                                                <state key="normal" backgroundImage="paperplane" catalog="system"/>
+                                                <connections>
+                                                    <action selector="sendButtonPressed:" destination="hRC-Kd-WMM" eventType="touchUpInside" id="RL5-Ha-XMS"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Pmg-8b-UpK"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="iYb-XR-Rhb" secondAttribute="trailing" id="13j-F0-4gR"/>
+                                    <constraint firstItem="iYb-XR-Rhb" firstAttribute="leading" secondItem="0V9-3U-5gB" secondAttribute="leading" id="7j1-Bz-iax"/>
+                                    <constraint firstItem="iYb-XR-Rhb" firstAttribute="top" secondItem="t6Y-Eu-QHG" secondAttribute="bottom" id="GSy-2R-YnM"/>
+                                    <constraint firstAttribute="trailing" secondItem="t6Y-Eu-QHG" secondAttribute="trailing" id="Ltj-wz-27D"/>
+                                    <constraint firstItem="t6Y-Eu-QHG" firstAttribute="top" secondItem="0V9-3U-5gB" secondAttribute="top" id="STX-Ul-5gB"/>
+                                    <constraint firstAttribute="bottom" secondItem="iYb-XR-Rhb" secondAttribute="bottom" id="lwJ-EN-K7e"/>
+                                    <constraint firstItem="t6Y-Eu-QHG" firstAttribute="leading" secondItem="0V9-3U-5gB" secondAttribute="leading" id="tHX-Ee-S4r"/>
+                                    <constraint firstItem="iYb-XR-Rhb" firstAttribute="top" secondItem="t6Y-Eu-QHG" secondAttribute="bottom" id="tJV-Sz-2lQ"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="0V9-3U-5gB" firstAttribute="bottom" secondItem="7DT-No-qNJ" secondAttribute="bottom" id="EG3-Ci-UMD"/>
+                            <constraint firstItem="7DT-No-qNJ" firstAttribute="trailing" secondItem="0V9-3U-5gB" secondAttribute="trailing" id="S7g-mB-noV"/>
+                            <constraint firstItem="0V9-3U-5gB" firstAttribute="leading" secondItem="7DT-No-qNJ" secondAttribute="leading" id="b6e-4n-FDi"/>
+                            <constraint firstItem="0V9-3U-5gB" firstAttribute="top" secondItem="7DT-No-qNJ" secondAttribute="top" id="m6t-Da-FL1"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="7DT-No-qNJ"/>
                     </view>
                     <navigationItem key="navigationItem" id="B6h-Tk-ATL"/>
+                    <connections>
+                        <outlet property="messageTextFeild" destination="des-cy-k2L" id="P4O-Ia-y0k"/>
+                        <outlet property="messagesTableView" destination="t6Y-Eu-QHG" id="IQP-tm-pGT"/>
+                        <outlet property="selcetImageButton" destination="ACW-9K-VyD" id="5eA-NK-bQ1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ma-Dr-dV7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -349,12 +408,17 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ctl-I6-6iK"/>
-        <segue reference="eym-o4-5tc"/>
+        <segue reference="Tmu-hP-enE"/>
+        <segue reference="dzh-R9-KO3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="loginbackground" width="736" height="1472"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
+        <image name="paperplane" catalog="system" width="128" height="121"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <namedColor name="registerbuttoncolor">
+            <color red="0.125" green="0.125" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

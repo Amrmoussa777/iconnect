@@ -8,7 +8,8 @@
 
 import Foundation
 struct Conversation {
-    let user1ID:String
-    let user2ID:String
+    
+    let useremail:String
+    let recevierEmail:String
     let lastTimeStamp:Date
 }

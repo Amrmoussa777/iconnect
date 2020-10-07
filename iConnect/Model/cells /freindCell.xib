@@ -57,6 +57,9 @@
                                         <state key="normal" backgroundImage="paperplane.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                         </state>
+                                        <connections>
+                                            <action selector="sendMessageButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4FD-6o-N9E"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

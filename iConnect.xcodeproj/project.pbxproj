@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1F2BE1E02462224400CF12A6 /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2BE1DF2462224400CF12A6 /* registerViewController.swift */; };
 		1F2EFA212460645500E3DD66 /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2EFA202460645500E3DD66 /* loginViewController.swift */; };
+		1F4188D82528F4070054899A /* senderMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4188D62528F4070054899A /* senderMessageCell.swift */; };
+		1F4188D92528F4070054899A /* senderMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4188D72528F4070054899A /* senderMessageCell.xib */; };
+		1F4188DC2528F4290054899A /* receiverMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4188DA2528F4290054899A /* receiverMessageCell.swift */; };
+		1F4188DD2528F4290054899A /* receiverMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4188DB2528F4290054899A /* receiverMessageCell.xib */; };
 		1F432CEC2521FD2000DE89FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F432CEB2521FD2000DE89FC /* GoogleService-Info.plist */; };
 		1F49E6822522027900E7FF9D /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F49E6812522027900E7FF9D /* Conversation.swift */; };
 		1F49E6842522028D00E7FF9D /* message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F49E6832522028D00E7FF9D /* message.swift */; };
@@ -19,8 +23,6 @@
 		1F49E68E252246CC00E7FF9D /* freindCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F49E68C252246CC00E7FF9D /* freindCell.xib */; };
 		1F49E69025224ACF00E7FF9D /* addfreindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F49E68F25224ACF00E7FF9D /* addfreindViewController.swift */; };
 		1F49E69225224AF100E7FF9D /* chatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F49E69125224AF100E7FF9D /* chatViewController.swift */; };
-		1F49E69525224BD600E7FF9D /* chatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F49E69325224BD600E7FF9D /* chatCell.swift */; };
-		1F49E69625224BD600E7FF9D /* chatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F49E69425224BD600E7FF9D /* chatCell.xib */; };
 		1F4A57082525E334000E835E /* DBop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A57072525E334000E835E /* DBop.swift */; };
 		1FC01FF9246226AB00525CDA /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC01FF8246226AB00525CDA /* constants.swift */; };
 		1FC0D6E52454E07C00F1A98F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0D6E42454E07C00F1A98F /* AppDelegate.swift */; };
@@ -35,6 +37,10 @@
 /* Begin PBXFileReference section */
 		1F2BE1DF2462224400CF12A6 /* registerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
 		1F2EFA202460645500E3DD66 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
+		1F4188D62528F4070054899A /* senderMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = senderMessageCell.swift; sourceTree = "<group>"; };
+		1F4188D72528F4070054899A /* senderMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = senderMessageCell.xib; sourceTree = "<group>"; };
+		1F4188DA2528F4290054899A /* receiverMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = receiverMessageCell.swift; sourceTree = "<group>"; };
+		1F4188DB2528F4290054899A /* receiverMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = receiverMessageCell.xib; sourceTree = "<group>"; };
 		1F432CEB2521FD2000DE89FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1F49E6812522027900E7FF9D /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		1F49E6832522028D00E7FF9D /* message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = message.swift; sourceTree = "<group>"; };
@@ -45,8 +51,6 @@
 		1F49E68C252246CC00E7FF9D /* freindCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = freindCell.xib; sourceTree = "<group>"; };
 		1F49E68F25224ACF00E7FF9D /* addfreindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addfreindViewController.swift; sourceTree = "<group>"; };
 		1F49E69125224AF100E7FF9D /* chatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatViewController.swift; sourceTree = "<group>"; };
-		1F49E69325224BD600E7FF9D /* chatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatCell.swift; sourceTree = "<group>"; };
-		1F49E69425224BD600E7FF9D /* chatCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = chatCell.xib; sourceTree = "<group>"; };
 		1F4A57072525E334000E835E /* DBop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBop.swift; sourceTree = "<group>"; };
 		1FC01FF8246226AB00525CDA /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		1FC0D6E12454E07C00F1A98F /* iConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,10 +99,7 @@
 				1F49E6832522028D00E7FF9D /* message.swift */,
 				1F49E68725223BFF00E7FF9D /* conversationTableViewCell.swift */,
 				1F49E68825223BFF00E7FF9D /* conversationTableViewCell.xib */,
-				1F49E68B252246CC00E7FF9D /* freindCell.swift */,
-				1F49E68C252246CC00E7FF9D /* freindCell.xib */,
-				1F49E69325224BD600E7FF9D /* chatCell.swift */,
-				1F49E69425224BD600E7FF9D /* chatCell.xib */,
+				1F4188D52528F01D0054899A /* cells  */,
 				1F4A57072525E334000E835E /* DBop.swift */,
 			);
 			path = Model;
@@ -110,6 +111,19 @@
 				1FC0D6EA2454E07C00F1A98F /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1F4188D52528F01D0054899A /* cells  */ = {
+			isa = PBXGroup;
+			children = (
+				1F49E68B252246CC00E7FF9D /* freindCell.swift */,
+				1F49E68C252246CC00E7FF9D /* freindCell.xib */,
+				1F4188D62528F4070054899A /* senderMessageCell.swift */,
+				1F4188D72528F4070054899A /* senderMessageCell.xib */,
+				1F4188DA2528F4290054899A /* receiverMessageCell.swift */,
+				1F4188DB2528F4290054899A /* receiverMessageCell.xib */,
+			);
+			path = "cells ";
 			sourceTree = "<group>";
 		};
 		1FC0D6D82454E07B00F1A98F = {
@@ -224,7 +238,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FC0D6F12454E08000F1A98F /* LaunchScreen.storyboard in Resources */,
-				1F49E69625224BD600E7FF9D /* chatCell.xib in Resources */,
+				1F4188D92528F4070054899A /* senderMessageCell.xib in Resources */,
+				1F4188DD2528F4290054899A /* receiverMessageCell.xib in Resources */,
 				1F49E68E252246CC00E7FF9D /* freindCell.xib in Resources */,
 				1F49E68A25223BFF00E7FF9D /* conversationTableViewCell.xib in Resources */,
 				1F432CEC2521FD2000DE89FC /* GoogleService-Info.plist in Resources */,
@@ -283,11 +298,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F2EFA212460645500E3DD66 /* loginViewController.swift in Sources */,
+				1F4188D82528F4070054899A /* senderMessageCell.swift in Sources */,
 				1F49E69225224AF100E7FF9D /* chatViewController.swift in Sources */,
 				1FC0D6E92454E07C00F1A98F /* ViewController.swift in Sources */,
 				1F49E68925223BFF00E7FF9D /* conversationTableViewCell.swift in Sources */,
 				1F49E68625223B6C00E7FF9D /* ConversationViewController.swift in Sources */,
-				1F49E69525224BD600E7FF9D /* chatCell.swift in Sources */,
 				1F49E69025224ACF00E7FF9D /* addfreindViewController.swift in Sources */,
 				1F49E68D252246CC00E7FF9D /* freindCell.swift in Sources */,
 				1FC0D6E52454E07C00F1A98F /* AppDelegate.swift in Sources */,
@@ -296,6 +311,7 @@
 				1F49E6842522028D00E7FF9D /* message.swift in Sources */,
 				1FC0D6E72454E07C00F1A98F /* SceneDelegate.swift in Sources */,
 				1FC01FF9246226AB00525CDA /* constants.swift in Sources */,
+				1F4188DC2528F4290054899A /* receiverMessageCell.swift in Sources */,
 				1F4A57082525E334000E835E /* DBop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

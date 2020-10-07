@@ -1,15 +1,18 @@
 //
-//  chatCell.swift
+//  receiverMessageCell.swift
 //  iConnect
 //
-//  Created by Amr Moussa on 9/28/20.
+//  Created by Amr Moussa on 10/3/20.
 //  Copyright © 2020 Amr Moussa. All rights reserved.
 //
 
 import UIKit
 
-class chatCell: UITableViewCell {
+class receiverMessageCell: UITableViewCell {
 
+    @IBOutlet weak var receiverImageview: UIImageView!
+    @IBOutlet weak var messagebody: UILabel!
+    @IBOutlet weak var messageTimeStamp: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
