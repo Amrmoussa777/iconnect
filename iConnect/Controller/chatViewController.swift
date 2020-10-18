@@ -12,15 +12,13 @@ class chatViewController: UIViewController {
     var Currentuser:freindModel?
     var conversationId:String?
     var reciver :freindModel?
-    var convID:String?
     let DB = DBop()
-    var messages:[message] = []
-    
+    var messages:[Any] = []
+    var convType:String?
+    let imagePicker =  UIImagePickerController()    
     @IBOutlet weak var messagesTableView: UITableView!
-    
     @IBOutlet weak var selcetImageButton: UIButton!
     @IBOutlet weak var messageTextFeild: UITextField!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.DB.getcurrentUser(callback: { (friend) in
@@ -30,61 +28,74 @@ class chatViewController: UIViewController {
                 print("sdssss/(freind)")
             }
         })
+        imagePicker.delegate = self
         print(reciver?.email ?? "")
-        
         messagesTableView.dataSource = self
         messagesTableView.delegate = self 
-        messagesTableView.register(UINib(nibName: const.identifiers.sendercellnibname, bundle: nil), forCellReuseIdentifier: const.identifiers.senderCell)
+        messagesTableView.register(UINib(nibName: const.identifiers.sendercellnibname, bundle: nil),
+                                   forCellReuseIdentifier: const.identifiers.senderCell)
         messagesTableView.register(UINib(nibName: const.identifiers.receivercellnibname, bundle: nil), forCellReuseIdentifier: const.identifiers.receiverCell)
+        messagesTableView.register(UINib(nibName: const.identifiers.senderiamgenib, bundle: nil), forCellReuseIdentifier: const.identifiers.senderimagecell)
+        messagesTableView.register(UINib(nibName: const.identifiers.receiveriamgenib, bundle: nil),
+                                   forCellReuseIdentifier: const.identifiers.receiverimagecell)
         // Do any additional setup after loading the view.
-        
-    
-    
+        navigationItem.title = reciver?.name
+
     }
     @IBAction func sendButtonPressed(_ sender: Any) {
         let mes = message(body: messageTextFeild.text!, type: const.DB.messageTypes.texttype, timestamp: Date().timeIntervalSince1970, owner: (self.Currentuser?.email)!)
         DB.createAddMessageToChat(conversationId!,mes){ (err,didSelectd) in
             if err != nil {print("error");return}
             else{
+                self.messageTextFeild.text = ""
                 self.loadmessagesTotableView()
             }
             
         }
         
-      }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
+    
+    @IBAction func selectImageButton(_ sender: Any) {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+    }
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     func loadmessagesTotableView(){
         print("recevier email " + (reciver?.email)!)
         DB.fetchCharmessages((reciver?.email)!) { (convId,retreivedMessages) in
-                    if convId == "error" {print("errormnmn")}
-                    else{
-                        if retreivedMessages?.isEmpty == true {
-                            if convId == "no found conv"{
-                                self.DB.createNewConv((self.reciver?.email)!){(newconvId,error) in
-                                    self.conversationId = newconvId
-                                    print("new chat addded with id \(self.conversationId!)")
-                                }
-                                
-                            }else {
-                                self.conversationId = convId
-                            }
-          
-                        }else if retreivedMessages?.isEmpty != true {
-                            self.conversationId = convId
-                            self.messages = retreivedMessages!
-                            self.messagesTableView.reloadData()
+            if convId == "error" {print("errormnmn")}
+            else{
+                if retreivedMessages?.isEmpty == true {
+                    if convId == "no found conv"{
+                        self.DB.createNewConv((self.reciver?.email)!){(newconvId,error) in
+                            self.conversationId = newconvId
+                            print("new chat addded with id \(self.conversationId!)")
                         }
+                        
+                    }else {
+                        self.conversationId = convId
+                    }
+                    
+                }else if retreivedMessages?.isEmpty != true {
+                    self.conversationId = convId
+                    self.messages = retreivedMessages!
+                    DispatchQueue.main.async {
+                        self.messagesTableView.reloadData()
+                        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                        self.messagesTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
                     }
                 }
+            }
+        }
         
         
     }
@@ -97,26 +108,83 @@ extension chatViewController:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let message = messages[indexPath.row]
-        print(message)
-        print(Currentuser)
-        if message.type == const.DB.messageTypes.texttype && message.owner == Currentuser?.email{
-          let cell = tableView.dequeueReusableCell(withIdentifier: const.identifiers.senderCell, for: indexPath) as! senderMessageCell
-            cell.messageTimeStamp.text = message.stringtimestamp
-            cell.messageBody.text = message.body
-            cell.senderImageView.image = UIImage(data: (self.Currentuser?.img)!)
-            return cell
+        if let message = message as? message {
+            print(message)
+            if message.type == const.DB.messageTypes.texttype && message.owner == Currentuser?.email{
+                let cell = tableView.dequeueReusableCell(withIdentifier: const.identifiers.senderCell, for: indexPath) as! senderMessageCell
+                cell.messageTimeStamp.text = message.stringtimestamp
+                cell.messageBody.text = message.body
+                cell.senderImageView.image = UIImage(data: (self.Currentuser?.img)!)
+                return cell
+                
+            }else if message.type == const.DB.messageTypes.texttype && message.owner == reciver?.email{
+                let  cell = tableView.dequeueReusableCell(withIdentifier: const.identifiers.receiverCell) as! receiverMessageCell
+                cell.messageTimeStamp.text = message.stringtimestamp
+                cell.messagebody.text = message.body
+                cell.receiverImageview.image = UIImage(data: (reciver?.img)!)
+                return cell
+            } 
             
-        }else if message.type == const.DB.messageTypes.texttype && message.owner == reciver?.email{
-           let  cell = tableView.dequeueReusableCell(withIdentifier: const.identifiers.receiverCell) as! receiverMessageCell
-            cell.messageTimeStamp.text = message.stringtimestamp
-            cell.messagebody.text = message.body
-            cell.receiverImageview.image = UIImage(data: (reciver?.img)!)
-            return cell
+        }else if let message = message as? imageMessage{
+            let gruop = DispatchGroup()
+            if message.type == const.DB.messageTypes.textWithImage && message.owner == Currentuser?.email{
+                let cell = tableView.dequeueReusableCell(withIdentifier: const.identifiers.senderimagecell, for: indexPath) as!
+                    senderImageMessageTableViewCell
+                cell.timestampLabel.text = message.stringtimestamp
+                cell.messagebody.text = message.body
+                cell.senderimage.image = UIImage(data: (self.Currentuser?.img)!)
+//                cell.imagelink = message.image
+                gruop.enter()
+                DB.fetchimage(message.image) { (data) in
+                    DispatchQueue.main.async {
+                        cell.messageImage.image = UIImage(data: data!)                    
+                    }
+                    gruop.leave()
+                }
+                gruop.wait()
+                
+               return cell
+                
+            }else if message.type == const.DB.messageTypes.textWithImage && message.owner == reciver?.email{
+                let cell = tableView.dequeueReusableCell(withIdentifier: const.identifiers.receiverimagecell, for: indexPath) as! receiverimageMessageTableViewCell
+                cell.timeStampLabel.text = message.stringtimestamp
+                cell.messagebody.text = message.body
+                cell.receiverImage.image = UIImage(data: (reciver?.img)!)
+                gruop.enter()
+                DB.fetchimage(message.image) { (data) in
+                cell.messageImage.image = UIImage(data: data!)
+                gruop.leave()
+                    }
+                gruop.wait()
+                return cell
+            }
+            
         }
         return UITableViewCell()
     }
     
-
     
+    
+    
+}
+extension chatViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            let newMessage = imageMessage(body: messageTextFeild.text!, type: const.DB.messageTypes.textWithImage, timestamp: Date().timeIntervalSince1970, owner: (Currentuser?.email)!, image: "")
+            DB.AddImageMessageToChat(conversationId!, newMessage, pickedImage) { (err, saved) in
+                if saved == true{
+                    self.loadmessagesTotableView()
+                }
+            }
+            
+            
+            
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
     
 }

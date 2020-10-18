@@ -13,6 +13,7 @@ struct const {
         static let registerToconversations = "registertoconversations"
         static let addnewconversation = "addnewconversation"
         static let addtochat = "addtochata"
+        static let convToChat = "convtochat"
     }
     struct colors {
         static let registerButtonColor  = "registerbuttoncolor"
@@ -52,6 +53,12 @@ struct const {
         static let sendercellnibname = "senderMessageCell"
         static let receiverCell = "receivermessageCell"
         static let receivercellnibname = "receiverMessageCell"
+        static let senderimagecell = "senderImagecell"
+        static let senderiamgenib = "senderImageMessageTableViewCell"
+        static let receiverimagecell = "receiverImagecell"
+        static let receiveriamgenib = "receiverimageMessageTableViewCell"
+        static let conversationcell = "conversationcell"
+        static let conversationcellnib = "conversationTableViewCell"
         
     }
 }

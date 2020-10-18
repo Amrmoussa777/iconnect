@@ -55,12 +55,11 @@ extension addfreindViewController:UITableViewDataSource,UITableViewDelegate{
         let freind = freinds[indexPath.row]
         cell.freindNameLabel.text = freind.name
         cell.lastActiveLabel.text = freind.lastActive
-        DispatchQueue.main.async {
-            cell.imageView?.image = UIImage(data: freind.img)
-                      cell.imageView?.contentMode = .scaleAspectFit
-                      cell.setNeedsLayout()
-                      
-                  }
+        cell.freindImageView.image = UIImage(data: freind.img)
+//            cell.imageView?.layer.cornerRadius = 40
+//            cell.imageView?.contentMode = .scaleAspectFill
+//            cell.imageView?.clipsToBounds = true
+                  
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

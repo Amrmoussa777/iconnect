@@ -7,9 +7,11 @@
 //
 
 import Foundation
+import UIKit
 struct Conversation {
-    
     let useremail:String
     let recevierEmail:String
-    let lastTimeStamp:Date
+    let lastTimeStamp:Double
+    let convID:String
+    let receiverImage:Data
 }

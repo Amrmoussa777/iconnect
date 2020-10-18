@@ -242,7 +242,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="w8M-4g-lC7">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="w8M-4g-lC7">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
@@ -265,14 +265,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="hRC-Kd-WMM" kind="show" id="Tmu-hP-enE"/>
+                        <outlet property="conversationsTableView" destination="w8M-4g-lC7" id="wQE-3y-Pth"/>
+                        <segue destination="hRC-Kd-WMM" kind="show" identifier="convtochat" id="Tmu-hP-enE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o1P-jT-0jT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1586" y="68"/>
+            <point key="canvasLocation" x="1597" y="80"/>
         </scene>
-        <!--Feinds-->
+        <!--Add New Freind-->
         <scene sceneID="7Ar-pZ-0bF">
             <objects>
                 <viewController id="5WU-7x-DCS" customClass="addfreindViewController" customModule="iConnect" customModuleProvider="target" sceneMemberID="viewController">
@@ -280,7 +281,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="phY-ZF-bdH">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="phY-ZF-bdH">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
@@ -294,7 +295,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="urV-RL-lv5"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Feinds" id="R1m-48-jiV"/>
+                    <navigationItem key="navigationItem" title="Add New Freind" id="R1m-48-jiV"/>
                     <connections>
                         <outlet property="freindsTable" destination="phY-ZF-bdH" id="MSB-ol-Mjy"/>
                         <segue destination="hRC-Kd-WMM" kind="show" identifier="addtochata" id="ctl-I6-6iK"/>
@@ -326,6 +327,9 @@
                                                 <rect key="frame" x="0.0" y="1" width="76" height="47.5"/>
                                                 <color key="tintColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" backgroundImage="photo" catalog="system"/>
+                                                <connections>
+                                                    <action selector="selectImageButton:" destination="hRC-Kd-WMM" eventType="touchUpInside" id="ZlA-iS-52W"/>
+                                                </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="how r u ?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="des-cy-k2L">
                                                 <rect key="frame" x="76" y="0.0" width="273" height="50"/>
@@ -408,7 +412,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tmu-hP-enE"/>
+        <segue reference="ctl-I6-6iK"/>
         <segue reference="dzh-R9-KO3"/>
     </inferredMetricsTieBreakers>
     <resources>
