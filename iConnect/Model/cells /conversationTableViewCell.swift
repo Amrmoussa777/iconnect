@@ -10,6 +10,7 @@ import UIKit
 
 class conversationTableViewCell: UITableViewCell {
     var covId:String?
+   
     @IBOutlet weak var freindImageView: UIImageView!
     @IBOutlet weak var freindNameLabel: UILabel!
     
@@ -26,6 +27,11 @@ class conversationTableViewCell: UITableViewCell {
     @IBAction func sendBurronPressed(_ sender: Any) {
         delegate!.whichconversatoin(covId!, const.DB.messageTypes.texttype,tag)
     }
+    @IBAction func imageButtonPressed(_ sender: Any) {
+        delegate!.whichconversatoin(covId!, const.DB.messageTypes.textWithImage,tag)
+        
+       }
+    
     override func awakeFromNib() {
         
         super.awakeFromNib()

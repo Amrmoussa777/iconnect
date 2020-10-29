@@ -15,18 +15,24 @@ class receiverimageMessageTableViewCell: UITableViewCell {
     @IBOutlet weak var messagebody: UILabel!
     @IBOutlet weak var messageImage: UIImageView!
     @IBOutlet weak var messageView: UIView!
-    var imagelink:String?
+    var imagelink:String?{
+        didSet{
+        reloadImage()
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         receiverImage.layer.cornerRadius = receiverImage.frame.width / 2
         receiverImage.clipsToBounds = true
         receiverImage.contentMode = .scaleAspectFill
-        
+        messagebody.layer.cornerRadius = 20
+        messagebody.clipsToBounds = true
         messageView.layer.cornerRadius = 40
         messageView.clipsToBounds = true
-    
-       
+        messageImage.layer.cornerRadius =  40
+        messageImage.clipsToBounds = true
+        self.setNeedsLayout()
     }
     override func prepareForReuse() {
           messagebody.text = ""
@@ -36,19 +42,25 @@ class receiverimageMessageTableViewCell: UITableViewCell {
             imagelink = nil
       }
     override func didMoveToSuperview() {
-        if let url = imagelink{
-                       DB.fetchimage(url) { (data) in
-                           DispatchQueue.main.async {
-                             self.messageImage.image = UIImage(data: data!)
-                           }
-                             
-                         }
-                     }else{print("nil image url senderrrrr")}
+      reloadImage()
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    
+    func reloadImage(){
+        if let url = imagelink{
+            DB.fetchimage(url) { (data) in
+                DispatchQueue.main.async {
+                    self.messageImage.image = UIImage(data: data!)
+                    self.messageImage.contentMode = .scaleAspectFill
+                    self.messageImage.layer.cornerRadius =
+                        self.messageImage.frame.width / 10
+                    self.messageImage.clipsToBounds = true
+                    self.setNeedsLayout()
+                }
+            }
+        }else{print("nil image url receiverrr")}
+    }
 }

@@ -68,7 +68,7 @@ class DBop{
     fileprivate func uploadImageToFBaseStrorage(_ image:UIImage?,callback:@escaping (String)->()){
         let uniqueString = UUID().uuidString
         let storageRef = Storage.storage().reference().child(uniqueString)
-        if let uploadData = image!.jpegData(compressionQuality: CGFloat(0.1)){
+        if let uploadData = image!.jpegData(compressionQuality: CGFloat(0.01)){
             DispatchQueue.main.async {
                 storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
                     if error != nil {
@@ -143,14 +143,15 @@ class DBop{
             comppletion(chsheImage)
         }
         else{
-            getIMageData(from: urll!) { (data, response, Err) in
+            if let linkUrl = urll {
+            getIMageData(from: linkUrl) { (data, response, Err) in
                 print("cashe Miss " + url)
                 guard let data = data , Err == nil else {print("errrrrrrrrrrrrrrrr");return}
                 ImagesCashe.sharedBinsatance.addImageToCashe(url, data)
                 comppletion(data)
             }
         }
-        
+        }
     }
     private func getIMageData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()

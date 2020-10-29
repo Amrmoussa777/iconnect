@@ -30,9 +30,12 @@ class senderImageMessageTableViewCell: UITableViewCell {
         messageImage.clipsToBounds = true
         messageView.layer.cornerRadius =  30
         messageView.clipsToBounds = true
+        messagebody.layer.cornerRadius = 20
+        messagebody.clipsToBounds = true
 
     }
     override func didMoveToSuperview() {
+       reloadimage()
     }
     override func prepareForReuse() {
         messagebody.text = ""

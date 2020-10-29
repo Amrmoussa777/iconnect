@@ -91,6 +91,9 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.99215686270000003" green="0.85882352939999995" blue="0.2274509804" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                                 <state key="normal" backgroundImage="photo.fill" catalog="system"/>
+                                                <connections>
+                                                    <action selector="imageButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2Rk-gq-XL4"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </view>

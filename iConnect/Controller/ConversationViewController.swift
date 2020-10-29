@@ -33,7 +33,11 @@ class ConversationViewController: UIViewController,WhichConversationTappedAndtyp
             self.loadconversation()
         }
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+       DispatchQueue.main.async {
+            self.loadconversation()
+        }
+    }
     func loadconversation(){
         DB.fetchConversations { (conversations) in
             if conversations.count != 0 {

@@ -18,12 +18,19 @@ class chatViewController: UIViewController {
     let imagePicker =  UIImagePickerController()    
     @IBOutlet weak var messagesTableView: UITableView!
     @IBOutlet weak var selcetImageButton: UIButton!
+    @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var messageTextFeild: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.DB.getcurrentUser(callback: { (friend) in
             if let freind = friend{
                 self.Currentuser = freind
+                if let type = self.convType{
+                    if type == const.DB.messageTypes.textWithImage{
+                        self.selcetImageButton.sendActions(for: .touchUpInside)
+                    }
+                    
+                }
                 self.loadmessagesTotableView()
                 print("sdssss/(freind)")
             }
@@ -43,9 +50,14 @@ class chatViewController: UIViewController {
 
     }
     @IBAction func sendButtonPressed(_ sender: Any) {
+        sendButton.tintColor? = #colorLiteral(red: 0.2335141599, green: 0.2789170742, blue: 0.3355808258, alpha: 0.6732930223)
+        sendButton.isUserInteractionEnabled = false
         let mes = message(body: messageTextFeild.text!, type: const.DB.messageTypes.texttype, timestamp: Date().timeIntervalSince1970, owner: (self.Currentuser?.email)!)
         DB.createAddMessageToChat(conversationId!,mes){ (err,didSelectd) in
-            if err != nil {print("error");return}
+            if err != nil {print("error")
+                self.sendButton.tintColor? = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                self.sendButton.isUserInteractionEnabled = true
+            return}
             else{
                 self.messageTextFeild.text = ""
                 self.loadmessagesTotableView()
@@ -70,6 +82,8 @@ class chatViewController: UIViewController {
      }
      */
     func loadmessagesTotableView(){
+        sendButton.tintColor? = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        sendButton.isUserInteractionEnabled = true
         print("recevier email " + (reciver?.email)!)
         DB.fetchCharmessages((reciver?.email)!) { (convId,retreivedMessages) in
             if convId == "error" {print("errormnmn")}
@@ -133,15 +147,15 @@ extension chatViewController:UITableViewDataSource,UITableViewDelegate{
                 cell.timestampLabel.text = message.stringtimestamp
                 cell.messagebody.text = message.body
                 cell.senderimage.image = UIImage(data: (self.Currentuser?.img)!)
-//                cell.imagelink = message.image
-                gruop.enter()
-                DB.fetchimage(message.image) { (data) in
-                    DispatchQueue.main.async {
-                        cell.messageImage.image = UIImage(data: data!)                    
-                    }
-                    gruop.leave()
-                }
-                gruop.wait()
+                cell.imagelink = message.image
+//                gruop.enter()
+//                DB.fetchimage(message.image) { (data) in
+//                    DispatchQueue.main.async {
+//                       // cell.messageImage.image = UIImage(data: data!)
+//                    }
+//                    gruop.leave()
+//                }
+//                gruop.wait()
                 
                return cell
                 
@@ -150,12 +164,15 @@ extension chatViewController:UITableViewDataSource,UITableViewDelegate{
                 cell.timeStampLabel.text = message.stringtimestamp
                 cell.messagebody.text = message.body
                 cell.receiverImage.image = UIImage(data: (reciver?.img)!)
-                gruop.enter()
-                DB.fetchimage(message.image) { (data) in
-                cell.messageImage.image = UIImage(data: data!)
-                gruop.leave()
-                    }
-                gruop.wait()
+                cell.imagelink = message.image
+//                gruop.enter()
+//                DB.fetchimage(message.image) { (data) in
+//                    DispatchQueue.main.async {
+//                       // cell.messageImage.image = UIImage(data: data!)
+//                    }
+//                gruop.leave()
+//                    }
+//                gruop.wait()
                 return cell
             }
             
@@ -171,7 +188,7 @@ extension chatViewController:UIImagePickerControllerDelegate,UINavigationControl
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let newMessage = imageMessage(body: messageTextFeild.text!, type: const.DB.messageTypes.textWithImage, timestamp: Date().timeIntervalSince1970, owner: (Currentuser?.email)!, image: "")
+            let newMessage = imageMessage(body: messageTextFeild.text?.count == 0 ? "New Image":messageTextFeild.text!, type: const.DB.messageTypes.textWithImage, timestamp: Date().timeIntervalSince1970, owner: (Currentuser?.email)!, image: "")
             DB.AddImageMessageToChat(conversationId!, newMessage, pickedImage) { (err, saved) in
                 if saved == true{
                     self.loadmessagesTotableView()
